@@ -32,22 +32,22 @@
             <!-- n_neighbors = 5 ,leaf_size = 30 -->
         </select>
         <br>
-        <label for="var_smoothing">var_smoothing</label><br>
-        <input name="var_smoothing" type="number" maxlength="150" placeholder="enter a number" value={{request.form.var_smoothing}}><br>
+        <label for="alpha">alpha</label><br>
+        <input name="alpha" type="number" max="1" min="0" step="0.1" placeholder="enter a float" value="1"><br>
         <label for="n_neighbors">n_neighbors</label><br>
-        <input name="n_neighbors" type="number"  placeholder="enter a number " value={{request.form.n_neighbours}}><br>
+        <input name="n_neighbors" type="number"  placeholder="enter a number " value='5'><br>
         <label for="max_leaf_nodes">max_leaf_nodes</label><br>
-        <input name="max_leaf_nodes" type="number"  placeholder="enter a number " value={{request.form.max_leaf_nodes}}><br>
+        <input name="max_leaf_nodes" type="number"  placeholder="enter a number " value='50'><br>
         <label for="leaf_size">leaf_size</label><br>
-        <input name="leaf_size" type="number" placeholder="enter a number " value={{request.form.leaf_size}}><br>
+        <input name="leaf_size" type="number" placeholder="enter a number " value='30'><br>
         <label for="max_depth">max_depth</label><br>
-        <input name="max_depth" type="number" placeholder="enter a number by default None" value={{request.form.max_depth}}><br>
+        <input name="max_depth" type="number" placeholder="enter a number by default None" value='50' ><br>
         <label for="min_samples_split">min_samples_split</label><br> 
-        <input name="min_samples_split" type="text" placeholder="enter a number by default 2" value={{request.form.min_sample_split}}><br>
+        <input name="min_samples_split" type="number" placeholder="leave empty for default values" value='2' ><br>
         <label for="n_estimators">n_estimators</label><br>
-        <input name="n_estimators" type="text" placeholder="enter a number by default 100" value ={{request.form.n_estimators}}><br>
+        <input name="n_estimators" type="number" placeholder="enter a number" value='500'><br>
         <label for="random_state">random state</label><br>
-        <input name="random_state" type="number" placeholder="enter a number by default 42" value ={{request.form.random_state}}> <br>
+        <input name="random_state" type="number" placeholder="enter a number by default 42" value='42' > <br>
         <input type="submit"> 
     </form>
 </body>

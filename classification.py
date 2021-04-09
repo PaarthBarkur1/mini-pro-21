@@ -11,22 +11,24 @@ import numpy as np  #this is a fuction that just takes input and gibes out clf a
 import pickle
 import requests
 
-def output(model1,var_smoothing1,n_neighbors1,leaf_size1,max_depth1,min_samples_split1,n_estimators1,random_state1,max_leaf_nodes1):
+def output(model1,alpha1=1,n_neighbors1=5,leaf_size1=30,max_depth1=50,min_samples_split1=2,n_estimators1=500,random_state1=42,max_leaf_nodes1=50):
+
+        
     model=model1 #insert the suitable choice here
     X_train=pd.read_csv('dftraincls.csv')
     Y_train=pd.read_csv('ytraincls.csv')
-    def naives(var_smoothing=1e-9):
-        from sklearn.naive_bayes import GaussianNB
+    
+    def naives(alpha=1.0):
+        from sklearn.naive_bayes import MultinomialNB
 
-
-        clf=GaussianNB()
+        clf=MultinomialNB(alpha=alpha1)
         clf.fit(X_train,Y_train.values.ravel())
 
         return clf
 
 
 
-    def randomforest(n_estimators=500,max_leaf_nodes=None,min_samples_split=2):
+    def randomforest(n_estimators=500,max_leaf_nodes=50,min_samples_split=2):
         from sklearn.ensemble import RandomForestClassifier
 
 
@@ -50,7 +52,7 @@ def output(model1,var_smoothing1,n_neighbors1,leaf_size1,max_depth1,min_samples_
 
 
     #this is decision tress
-    def decisiontrees(max_depth=None,min_samples_split=2):
+    def decisiontrees(max_depth=50,min_samples_split=2):
         from sklearn.tree import DecisionTreeClassifier
 
 
@@ -63,7 +65,7 @@ def output(model1,var_smoothing1,n_neighbors1,leaf_size1,max_depth1,min_samples_
 
 
     #regression begins
-    def randomforestreg(n_estimators=500,max_leaf_nodes=None):
+    def randomforestreg(n_estimators=500,max_leaf_nodes=50):
         from sklearn.ensemble import RandomForestRegressor
 
         clf=RandomForestRegressor(n_estimators=n_estimators,max_leaf_nodes=max_leaf_nodes,n_jobs = -1)
@@ -94,7 +96,7 @@ def output(model1,var_smoothing1,n_neighbors1,leaf_size1,max_depth1,min_samples_
 
         return clf
 
-    def decisiontreereg( max_depth=None,random_state=42,min_samples_split=2):
+    def decisiontreereg( max_depth=50,random_state=42,min_samples_split=2):
         from sklearn.tree import DecisionTreeRegressor
 
         clf=DecisionTreeRegressor(max_depth=max_depth,random_state=random_state,min_samples_split=int(min_samples_split))
@@ -106,7 +108,7 @@ def output(model1,var_smoothing1,n_neighbors1,leaf_size1,max_depth1,min_samples_
 
     if model == 'naivebayes':
         
-        clf=naives(var_smoothing=var_smoothing1)
+        clf=naives(alpha=alpha1)
         pickle.dump(clf,open('model.pkl','wb'))
         modelf=pickle.load(open('model.pkl','rb'))
         
@@ -152,4 +154,3 @@ def output(model1,var_smoothing1,n_neighbors1,leaf_size1,max_depth1,min_samples_
         pickle.dump(clf,open('model.pkl','wb'))
         modelf=pickle.load(open('model.pkl','rb'))
 
-    
